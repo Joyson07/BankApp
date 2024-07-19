@@ -1,18 +1,19 @@
 import Header from '@/components/Header'
 import RightSidebar from '@/components/RightSidebar';
 import TotalBalance from '@/components/TotalBalance';
+import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react'
 
-const Home = () => {
-  const loggedIn ={firstName:'Joyson' , lastName: 'Lobo', email:'contact@bank.co.uk'};
-  return (
+const Home = async() => {
+  const loggedIn = await getLoggedInUser();
+  return(
     <section className='home'> 
     <div className='home-content'>
 <header className='home-header'>
 <Header 
 type= "greeting"
 title = "Welcome"
-user ={loggedIn?.firstName || 'Guest'}
+user ={loggedIn?.name || 'Guest'}
 subtext = "Manage your accounts and transactions"
 
 />
@@ -37,8 +38,8 @@ RECENT TRANSACTIONS
     />
      </section>
     
-   
   )
+  
 }
 
 export default Home
